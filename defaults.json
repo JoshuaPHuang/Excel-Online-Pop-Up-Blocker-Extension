@@ -96,7 +96,7 @@
         "appended": false,
         "text": "'Editing session in progress'<br>'Other people are already editing this workbook. You can join their editing session, but you will lose any changes you have made so far. Would you like to join the existing editing session anyway?'",
         "label": "Check to auto-select 'Yes'.",
-        "xpath": "//div[contains(text(), 'Editing session in progress')]",
+        "xpath": "//*[contains(text(), 'Editing session in progress')]",
         "method": ".//button[@aria-label='Yes']"
     },
     "2-5": {
