@@ -52,8 +52,15 @@ class PromiseQueue {
 
 // Function to show one element and hide another
 function showHideElems(showElem, hideElem) {
-    showElem.style.display = "block";
+    hideElem.classList.remove("is-visible");
     hideElem.style.display = "none";
+    if (showElem.classList.contains("new-row-form")) {
+        showElem.classList.add("is-visible");
+        showElem.style.display = "flex";
+    } else {
+        showElem.classList.remove("is-visible");
+        showElem.style.display = "block";
+    }
 }
 
 function resetErrorClass(elem) {
@@ -347,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let container = containerD[rowItem.section];
         let beforeElem = beforeElemD[rowItem.section];
         const newDiv = document.createElement('div');
-        newDiv.className = "row";
+        newDiv.className = rowItem.appended ? "row row--appended" : "row";
         newDiv.id = `row-${rowItem.idNumStr}`;
         let htmlText, htmlLabel, htmlDelete;
         if (rowItem.appended) {
@@ -361,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         newDiv.innerHTML = `
             <label for="checkbox-${rowItem.idNumStr}">
-                <input type="checkbox" id="checkbox-${rowItem.idNumStr}" style="margin-right: 0.5rem">${rowItem.name}
+                <input type="checkbox" class="row-checkbox" id="checkbox-${rowItem.idNumStr}">${rowItem.name}
                 <div class="info-container">
                     <div class="hoverable">🛈</div>
                     <div class="tooltip">${htmlText}<br><br>${htmlLabel}</div>

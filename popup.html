@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excel Pop-Up Blocker Popup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <h2 style="white-space: pre-wrap; overflow-wrap: break-word; margin-top: -1rem; text-align: center;" id="title">Excel Online<br>Pop-Up Blocker</h2>
-    <div class="section">This Extension suppresses annoying pop-ups in Excel Online.
+    <h2 class="popup-title" id="title">Excel Online<br>Pop-Up Blocker</h2>
+    <div class="section intro">This Extension suppresses annoying pop-ups in Excel Online.
         <div class="info-container" id="intro-hoverable">
             <div class="hoverable">🛈</div>
             <div class="tooltip" id="intro-tooltip">Only dialogs contained in iframes with origin containing "https://*.<wbr>officeapps.<wbr>live.<wbr>com/" are suppressed.<br>To expand functionality to the overall page or to additional origins, please contact the developer.</div>
@@ -19,13 +22,13 @@
 
 
     <div class="section 1" id="blocked-pop-ups">
-        <h3>Block Pop-Ups</h3>
+        <h3 class="section-heading">Block Pop-Ups</h3>
     </div>
 
 
 
     <div class="section 2" id="auto-approved-pop-ups">
-        <h3>Auto-Approve Pop-Ups</h3>
+        <h3 class="section-heading">Auto-Approve Pop-Ups</h3>
         <!-- <div class="row" id="row-2-1">
             <label for="checkbox-2-1">
                 <input type="checkbox" id="checkbox-2-1" style="margin-right: 0.5rem">Workbook Locked
@@ -35,11 +38,11 @@
                 </div>
             </label>
         </div> -->
-        <div class="row" id="new-row-2" style="display: flexbox; float:left;">
+        <div class="row new-row-form" id="new-row-2">
             <button id="new-save-button-2" class="add-button" title="Save New Row">+</button>
-            <input type="text" id="new-name-2" placeholder="Name" style="width:15%">
-            <input type="text" id="new-text-2" placeholder="Pop-Up Text" style="width:28%">
-            <input type="text" id="new-label-2" placeholder="Button Label" style="width:28%">
+            <input type="text" id="new-name-2" class="new-name" placeholder="Name">
+            <input type="text" id="new-text-2" class="new-text" placeholder="Pop-Up Text">
+            <input type="text" id="new-label-2" class="new-label-input" placeholder="Button Label">
             <div class="info-container">
                 <div class="hoverable">🛈</div>
                 <div class="tooltip">Name: Input the name you would like to label this item as.<br><br>Pop-Up Text: Text which is visible on the pop-up. The extension will look for this text as an indication that the pop-up has appeared.<br><br>Button Label: Exact text on the button that will be automatically clicked. The extension will look for a button with aria-label matching this. Most X's have aria-label="Close".<br><br>Saving: Press Enter to save, or press the "+" button to the left of your entry.</div>
@@ -48,7 +51,7 @@
         </div>
         <div class="row" id="add-row-2">
             <label for="add-button-2" class="add-label">
-                <button id="add-button-2" class="add-button" title="Add New Row" style="margin-right: 0.5rem">+</button>Add New Row
+                <button id="add-button-2" class="add-button" title="Add New Row">+</button>Add New Row
             </label>
         </div>
     </div>
@@ -56,12 +59,12 @@
 
 
     <div class="section 3" id="auto-closed-pop-ups">
-        <h3>Auto-Close Pop-Ups</h3>
-        <div class="row" id="new-row-3" style="display: flexbox; float:left;">
+        <h3 class="section-heading">Auto-Close Pop-Ups</h3>
+        <div class="row new-row-form" id="new-row-3">
             <button id="new-save-button-3" class="add-button" title="Save New Row">+</button>
-            <input type="text" id="new-name-3" placeholder="Name" style="width:15%">
-            <input type="text" id="new-text-3" placeholder="Pop-Up Text" style="width:28%">
-            <input type="text" id="new-label-3" placeholder="Button Label" style="width:28%">
+            <input type="text" id="new-name-3" class="new-name" placeholder="Name">
+            <input type="text" id="new-text-3" class="new-text" placeholder="Pop-Up Text">
+            <input type="text" id="new-label-3" class="new-label-input" placeholder="Button Label">
             <div class="info-container">
                 <div class="hoverable">🛈</div>
                 <div class="tooltip">Name: Input the name you would like to label this item as.<br><br>Pop-Up Text: Text which is visible on the pop-up. The extension will look for this text as an indication that the pop-up has appeared.<br><br>Button Label: Exact text on the button that will be automatically clicked. The extension will look for a button with aria-label matching this. Most X's have aria-label="Close".<br><br>Saving: Press Enter to save, or press the "+" button to the left of your entry.</div>
@@ -70,7 +73,7 @@
         </div>
         <div class="row" id="add-row-3">
             <label for="add-button-3" class="add-label">
-                <button id="add-button-3" class="add-button" title="Add New Row" style="margin-right: 0.5rem">+</button>Add New Row
+                <button id="add-button-3" class="add-button" title="Add New Row">+</button>Add New Row
             </label>
         </div>
     </div>
@@ -78,7 +81,7 @@
 
     
     <div class="section 4" id="settings">
-        <h3>Settings</h3>
+        <h3 class="section-heading">Settings</h3>
         <div class="row" id="row-4-2">
             <a href="https://github.com/JoshuaPHuang/Excel-Online-Notif-Suppressor-Extension" target="_blank">View Github Repository</a>
         </div>

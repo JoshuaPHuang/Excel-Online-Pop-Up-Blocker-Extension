@@ -22,6 +22,11 @@ function createNotif(notifTxt) {
     chrome.runtime.sendMessage( {type: 'xlpbNotif', text: notifTxt} )    
 }
 
+// Function to send log lines (persisted in background.js)
+function createLog(subject, info) {
+    chrome.runtime.sendMessage({ type: 'xlpbLog', subject, info });
+}
+
 // Function to look for an xpath in a certain context (document for most cases)
 const searchXPath = (context, xPath) => {
     return document.evaluate(xPath, context, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -158,6 +163,7 @@ function initXlObserver() {
         }).catch(error => {
             console.log(error);
             console.error("Error fetching data!");
+            createLog('System', `Error fetching data! ${error}`);
             reject(error);
         });
     });
@@ -205,6 +211,7 @@ function suppressor(mem) {
         let foundElem = null;
         if (item.state !== true) {
             console.error(`Key ${item.idNumStr} .state !== true, please check the filter`);
+            createLog('System', `Key ${item.idNumStr} .state !== true, please check the filter`);
             return;
         } else if (item.xpath == "" || item.method == "") {
             return;
@@ -216,12 +223,15 @@ function suppressor(mem) {
         if (item.method == "REMOVE") { // Remove the element entirely if remove is selected
             foundElem.remove();
             suppressedFlag = true;
+            createLog(item.name, 'Suppressed (REMOVE)');
         } else {
             try {
                 nearestXPath(foundElem, item.method).click(); // Click on the method button to interact w/ the dialog
                 suppressedFlag = true;
+                createLog(item.name, 'Suppressed (click)');
             } catch (error) {
                 console.log(`Error trying to click ${item.method}: ${error}`);
+                createLog(item.name, `Error trying to click ${item.method}: ${error}`);
             }
         }
         if (notifFlag && suppressedFlag) {
