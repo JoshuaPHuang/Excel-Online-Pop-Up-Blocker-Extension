@@ -29,12 +29,37 @@ class PromiseQueue {
 }
 
 
+// Function to generate [mm/dd/YYYY HH:MM:SS] timestamp
+function timestamp() {
+    const now = new Date();
+    const pad = (num) => String(num).padStart(2, '0');
+    const month = pad(now.getMonth() + 1); // getMonth() zero-based
+    const day = pad(now.getDate());
+    const year = now.getFullYear();
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+    return `[${month}/${day}/${year} ${hours}:${minutes}:${seconds}]`;
+}
+
+
 // Create a queue for notifications to make sure they are not sent too quickly
 let notifQueue = new PromiseQueue();
 const notifDelay = 1000; // 1 second
 
+// Create a queue for log writes so concurrent frames do not race storage
+let logsQueue = new PromiseQueue();
+const MAX_LOG_LINES = 1000;
 
-// Listen for notification requests from content scripts
+// Initialize empty logs array if missing
+chrome.storage.local.get(["xlpbLogs"], function(result) {
+    if (!result.xlpbLogs) {
+        chrome.storage.local.set({ xlpbLogs: [] });
+    }
+});
+
+
+// Listen for notification and log requests from content scripts
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message.type === 'xlpbNotif') {
         notifQueue.add(() => new Promise((resolve) => {
@@ -45,6 +70,20 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
                 message: message.text
             });
             setTimeout(resolve, notifDelay); // Call resolve to finish this task after notifDelay has elapsed
+        }));
+    } else if (message.type === 'xlpbLog') {
+        const logStr = timestamp() + ' ' + message.subject + ': ' + message.info;
+        logsQueue.add(() => new Promise((resolve) => {
+            chrome.storage.local.get(["xlpbLogs"], (result) => {
+                let logsArr = result.xlpbLogs || [];
+                logsArr.push(logStr);
+                if (logsArr.length > MAX_LOG_LINES) {
+                    logsArr = logsArr.slice(-MAX_LOG_LINES);
+                }
+                chrome.storage.local.set({ xlpbLogs: logsArr }, () => {
+                    resolve();
+                });
+            });
         }));
     }
 });
