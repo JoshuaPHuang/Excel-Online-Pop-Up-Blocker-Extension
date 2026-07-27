@@ -71,8 +71,82 @@ function setErrorClass(elem) {
     elem.classList.add('error');
 }
 
+const TOOLTIP_GAP = 4; // Small gap between the info icon and the tooltip
+const TOOLTIP_EDGE = 8; // Minimum distance from the popup window edges
+
+// Function to hide any currently open info tooltips and clear their inline positions
+function hideAllTooltips() {
+    document.querySelectorAll('.tooltip.tooltip-open').forEach((tip) => {
+        tip.classList.remove('tooltip-open');
+        tip.style.left = '';
+        tip.style.top = '';
+        tip.style.visibility = '';
+    });
+}
+
+// Function to place a tooltip below and left-aligned to the info icon when possible; flips above or shifts sideways if it would go outside the popup
+function positionSmartTooltip(anchorEl, tipEl) {
+    tipEl.style.visibility = 'hidden';
+    tipEl.classList.add('tooltip-open');
+
+    const anchor = anchorEl.getBoundingClientRect();
+    const tipWidth = tipEl.offsetWidth;
+    const tipHeight = tipEl.offsetHeight;
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+
+    // Try to place below the icon first; if there isn't room, try above; otherwise clamp into the viewport
+    let top = anchor.bottom + TOOLTIP_GAP;
+    if (top + tipHeight > vh - TOOLTIP_EDGE) {
+        const above = anchor.top - TOOLTIP_GAP - tipHeight;
+        if (above >= TOOLTIP_EDGE) {
+            top = above;
+        } else {
+            top = Math.max(TOOLTIP_EDGE, Math.min(top, vh - TOOLTIP_EDGE - tipHeight));
+        }
+    }
+
+    // Try to left-align with the icon; shift if the tooltip would clip off the left or right edge of the popup
+    let left = anchor.left;
+    if (left + tipWidth > vw - TOOLTIP_EDGE) {
+        left = vw - TOOLTIP_EDGE - tipWidth;
+    }
+    if (left < TOOLTIP_EDGE) {
+        left = TOOLTIP_EDGE;
+    }
+
+    tipEl.style.left = `${left}px`;
+    tipEl.style.top = `${top}px`;
+    tipEl.style.visibility = 'visible';
+}
+
+// Function to show the tooltip for a given info-container (hides any other open tooltip first)
+function showSmartTooltip(infoContainer) {
+    const tip = infoContainer.querySelector('.tooltip');
+    const anchor = infoContainer.querySelector('.hoverable') || infoContainer;
+    if (!tip) return;
+    hideAllTooltips();
+    positionSmartTooltip(anchor, tip);
+}
+
 // MAIN FUNCTION
 document.addEventListener("DOMContentLoaded", function () {
+    // Add listeners for info tooltips; uses mouseover/mouseout on body so rows added later still get tooltips
+    document.body.addEventListener('mouseover', (event) => {
+        const info = event.target.closest('.info-container');
+        if (!info) return;
+        if (info.contains(event.relatedTarget)) return;
+        showSmartTooltip(info);
+    });
+    document.body.addEventListener('mouseout', (event) => {
+        const info = event.target.closest('.info-container');
+        if (!info) return;
+        if (info.contains(event.relatedTarget)) return;
+        hideAllTooltips();
+    });
+    window.addEventListener('scroll', hideAllTooltips, true); // Hide tooltips if the popup scrolls
+    window.addEventListener('resize', hideAllTooltips); // Hide tooltips if the popup is resized
+
     // KEY
     // 2: Auto-Approve Pop-Ups section
     // 3: Auto-Close Pop-Ups section

@@ -47,11 +47,11 @@ function timestamp() {
 let notifQueue = new PromiseQueue();
 const notifDelay = 1000; // 1 second
 
-// Create a queue for log writes so concurrent frames do not race storage
+// Create a queue for log writes so concurrent frames do not overwrite each other in chrome.storage.local
 let logsQueue = new PromiseQueue();
-const MAX_LOG_LINES = 1000;
+const MAX_LOG_LINES = 1000; // Keep only the newest 1000 log lines so storage writes stay fast
 
-// Initialize empty logs array if missing
+// Try to set default overall logs in chrome.storage.local if they do not exist yet
 chrome.storage.local.get(["xlpbLogs"], function(result) {
     if (!result.xlpbLogs) {
         chrome.storage.local.set({ xlpbLogs: [] });
@@ -69,7 +69,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
                 title: 'Excel Suppressor Notification',
                 message: message.text
             });
-            setTimeout(resolve, notifDelay); // Call resolve to finish this task after notifDelay has elapsed
+            setTimeout(resolve, notifDelay); // Call resolve to finish this task after notifDelay is done
         }));
     } else if (message.type === 'xlpbLog') {
         const logStr = timestamp() + ' ' + message.subject + ': ' + message.info;
@@ -78,10 +78,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
                 let logsArr = result.xlpbLogs || [];
                 logsArr.push(logStr);
                 if (logsArr.length > MAX_LOG_LINES) {
-                    logsArr = logsArr.slice(-MAX_LOG_LINES);
+                    logsArr = logsArr.slice(-MAX_LOG_LINES); // Delete the oldest lines when over the soft cap
                 }
                 chrome.storage.local.set({ xlpbLogs: logsArr }, () => {
-                    resolve();
+                    resolve(); // Finish up
                 });
             });
         }));
