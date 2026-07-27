@@ -14,7 +14,7 @@
     <div class="section intro">This Extension suppresses annoying pop-ups in Excel Online.
         <div class="info-container" id="intro-hoverable">
             <div class="hoverable">🛈</div>
-            <div class="tooltip" id="intro-tooltip">Only dialogs contained in iframes with origin containing "https://*.<wbr>officeapps.<wbr>live.<wbr>com/" are suppressed.<br>To expand functionality to the overall page or to additional origins, please contact the developer.</div>
+            <div class="tooltip" id="intro-tooltip">Only dialogs contained in iframes with origins matching "https://usc-excel.officeapps.live.com/*", "https://excel.officeapps.live.com/*", or "https://officeonline.sfcollab.org/*" are suppressed.<br>To expand functionality to the overall page or to additional origins, please contact the developer.</div>
         </div>
     </div>
     <p>Select which pop-ups to block below!<br>Any modifications to the Excel Online experience are made solely at the user's discretion. Please use responsibly.</p>
@@ -39,15 +39,37 @@
             </label>
         </div> -->
         <div class="row new-row-form" id="new-row-2">
-            <button id="new-save-button-2" class="add-button" title="Save New Row">+</button>
-            <input type="text" id="new-name-2" class="new-name" placeholder="Name">
-            <input type="text" id="new-text-2" class="new-text" placeholder="Pop-Up Text">
-            <input type="text" id="new-label-2" class="new-label-input" placeholder="Button Label">
-            <div class="info-container">
-                <div class="hoverable">🛈</div>
-                <div class="tooltip">Name: Input the name you would like to label this item as.<br><br>Pop-Up Text: Text which is visible on the pop-up. The extension will look for this text as an indication that the pop-up has appeared.<br><br>Button Label: Exact text on the button that will be automatically clicked. The extension will look for a button with aria-label matching this. Most X's have aria-label="Close".<br><br>Saving: Press Enter to save, or press the "+" button to the left of your entry.</div>
+            <div class="new-field-row">
+                <span class="new-field-label">Name</span>
+                <div class="info-container">
+                    <div class="hoverable">🛈</div>
+                    <div class="tooltip">Input the name you would like to label this item as.</div>
+                </div>
+                <input type="text" id="new-name-2" class="new-field-input" aria-label="Name" placeholder="Name">
+                <button type="button" class="field-clear-button" data-clear-input="new-name-2" title="Clear">↺</button>
             </div>
-            <button class="delete-button" id="cancel-new-row-2">&times;</button>
+            <div class="new-field-row">
+                <span class="new-field-label">Pop-Up Text</span>
+                <div class="info-container">
+                    <div class="hoverable">🛈</div>
+                    <div class="tooltip">Text which is visible on the pop-up. The extension will look for this text as an indication that the pop-up has appeared.</div>
+                </div>
+                <input type="text" id="new-text-2" class="new-field-input" aria-label="Pop-Up Text" placeholder="Pop-Up Text">
+                <button type="button" class="field-clear-button" data-clear-input="new-text-2" title="Clear">↺</button>
+            </div>
+            <div class="new-field-row">
+                <span class="new-field-label">Button Label</span>
+                <div class="info-container">
+                    <div class="hoverable">🛈</div>
+                    <div class="tooltip">Exact text on the button that will be automatically clicked. The extension will look for a button with aria-label matching this. Most X's have aria-label="Close".</div>
+                </div>
+                <input type="text" id="new-label-2" class="new-field-input" aria-label="Button Label" placeholder="Button Label">
+                <button type="button" class="field-clear-button" data-clear-input="new-label-2" title="Clear">↺</button>
+            </div>
+            <div class="new-row-actions">
+                <button type="button" id="cancel-new-row-2" class="new-cancel-button" title="Cancel">Cancel</button>
+                <button type="button" id="new-save-button-2" class="new-save-button" title="Save New Row">Save +</button>
+            </div>
         </div>
         <div class="row" id="add-row-2">
             <label for="add-button-2" class="add-label">
@@ -61,15 +83,37 @@
     <div class="section 3" id="auto-closed-pop-ups">
         <h3 class="section-heading">Auto-Close Pop-Ups</h3>
         <div class="row new-row-form" id="new-row-3">
-            <button id="new-save-button-3" class="add-button" title="Save New Row">+</button>
-            <input type="text" id="new-name-3" class="new-name" placeholder="Name">
-            <input type="text" id="new-text-3" class="new-text" placeholder="Pop-Up Text">
-            <input type="text" id="new-label-3" class="new-label-input" placeholder="Button Label">
-            <div class="info-container">
-                <div class="hoverable">🛈</div>
-                <div class="tooltip">Name: Input the name you would like to label this item as.<br><br>Pop-Up Text: Text which is visible on the pop-up. The extension will look for this text as an indication that the pop-up has appeared.<br><br>Button Label: Exact text on the button that will be automatically clicked. The extension will look for a button with aria-label matching this. Most X's have aria-label="Close".<br><br>Saving: Press Enter to save, or press the "+" button to the left of your entry.</div>
+            <div class="new-field-row">
+                <span class="new-field-label">Name</span>
+                <div class="info-container">
+                    <div class="hoverable">🛈</div>
+                    <div class="tooltip">Input the name you would like to label this item as.</div>
+                </div>
+                <input type="text" id="new-name-3" class="new-field-input" aria-label="Name" placeholder="Name">
+                <button type="button" class="field-clear-button" data-clear-input="new-name-3" title="Clear">↺</button>
             </div>
-            <button class="delete-button" id="cancel-new-row-3">&times;</button>
+            <div class="new-field-row">
+                <span class="new-field-label">Pop-Up Text</span>
+                <div class="info-container">
+                    <div class="hoverable">🛈</div>
+                    <div class="tooltip">Text which is visible on the pop-up. The extension will look for this text as an indication that the pop-up has appeared.</div>
+                </div>
+                <input type="text" id="new-text-3" class="new-field-input" aria-label="Pop-Up Text" placeholder="Pop-Up Text">
+                <button type="button" class="field-clear-button" data-clear-input="new-text-3" title="Clear">↺</button>
+            </div>
+            <div class="new-field-row">
+                <span class="new-field-label">Button Label</span>
+                <div class="info-container">
+                    <div class="hoverable">🛈</div>
+                    <div class="tooltip">Exact text on the button that will be automatically clicked. The extension will look for a button with aria-label matching this. Most X's have aria-label="Close".</div>
+                </div>
+                <input type="text" id="new-label-3" class="new-field-input" aria-label="Button Label" placeholder="Button Label">
+                <button type="button" class="field-clear-button" data-clear-input="new-label-3" title="Clear">↺</button>
+            </div>
+            <div class="new-row-actions">
+                <button type="button" id="cancel-new-row-3" class="new-cancel-button" title="Cancel">Cancel</button>
+                <button type="button" id="new-save-button-3" class="new-save-button" title="Save New Row">Save +</button>
+            </div>
         </div>
         <div class="row" id="add-row-3">
             <label for="add-button-3" class="add-label">
@@ -87,9 +131,6 @@
         </div>
         <div class="row" id="row-4-3">
             <a href="logs.html" target="_blank">View Logs</a>
-        </div>
-        <div class="row" id="row-4-4">
-            <a href="acknowledgments.html" target="_blank">View Acknowledgments</a>
         </div>
     </div>
 

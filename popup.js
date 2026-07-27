@@ -147,6 +147,17 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', hideAllTooltips, true); // Hide tooltips if the popup scrolls
     window.addEventListener('resize', hideAllTooltips); // Hide tooltips if the popup is resized
 
+    // Clear a single new-row field when its reset button is clicked
+    document.body.addEventListener('click', (event) => {
+        const clearBtn = event.target.closest('.field-clear-button');
+        if (!clearBtn) return;
+        const input = document.getElementById(clearBtn.dataset.clearInput);
+        if (!input) return;
+        input.value = '';
+        resetErrorClass(input);
+        input.focus();
+    });
+
     // KEY
     // 2: Auto-Approve Pop-Ups section
     // 3: Auto-Close Pop-Ups section
@@ -442,7 +453,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         newDiv.innerHTML = `
             <label for="checkbox-${rowItem.idNumStr}">
-                <input type="checkbox" class="row-checkbox" id="checkbox-${rowItem.idNumStr}">${rowItem.name}
+                <input type="checkbox" class="row-checkbox" id="checkbox-${rowItem.idNumStr}"><span class="row-name">${rowItem.name}</span>
                 <div class="info-container">
                     <div class="hoverable">🛈</div>
                     <div class="tooltip">${htmlText}<br><br>${htmlLabel}</div>
@@ -451,7 +462,12 @@ document.addEventListener("DOMContentLoaded", function () {
             ${htmlDelete}
         `;
         container.insertBefore(newDiv, beforeElem); // Insert the element
-        document.getElementById(`checkbox-${rowItem.idNumStr}`).checked = rowItem.state; // Set the checked state of this new checkbox
+        const checkboxElem = document.getElementById(`checkbox-${rowItem.idNumStr}`);
+        checkboxElem.checked = rowItem.state; // Set the checked state of this new checkbox
+        // Native delayed tooltip on the checkbox and row name (same idea as title= on Save +)
+        const rowTitleTip = `${htmlText}\n\n${htmlLabel}`;
+        checkboxElem.title = rowTitleTip;
+        newDiv.querySelector('.row-name').title = rowTitleTip;
         if (rowItem.appended) { // Add delete button if this is an appended row
             document.getElementById(`delete-row-${rowItem.idNumStr}`).addEventListener("click", deleteRow); // Add a listener on the delete button to delete the row
         }

@@ -54,16 +54,18 @@ body:disabled {
 /* Title */
 .popup-title,
 #title {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--text);
+    letter-spacing: 0.01em;
+    color: var(--surface);
     text-align: center;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     margin: 0 0 0.85rem;
-    padding-bottom: 0.65rem;
-    border-bottom: 2px solid var(--accent);
+    padding: 0.7rem 1.15rem;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
 }
 
 /* Intro / disclaimer */
@@ -94,8 +96,12 @@ body > p {
 body > .section:not([id]) {
     background: transparent;
     border: none;
-    padding: 0;
-    margin-bottom: 0.35rem;
+    padding: 0 0.15rem 0 0.85rem; /* Align with text inside bordered sections below */
+    margin: 0 0 0.45rem;
+}
+
+body > p {
+    margin: 0 0.15rem 1rem 0.85rem; /* Match intro inset so copy doesn't sit wider than section content */
 }
 
 .section-heading,
@@ -151,6 +157,10 @@ body > .section:not([id]) {
     flex-shrink: 0;
     accent-color: var(--accent);
     cursor: pointer;
+}
+
+.row-name {
+    cursor: default;
 }
 
 /* Info / tooltips */
@@ -249,6 +259,10 @@ body > .section:not([id]) {
     padding-right: 0 !important;
 }
 
+.row label.add-label {
+    gap: 0.4rem; /* Override .row label gap so space appears between + and "Add New Row" */
+}
+
 .add-label:hover {
     color: var(--accent);
 }
@@ -278,11 +292,12 @@ body > .section:not([id]) {
 #new-row-2,
 #new-row-3 {
     display: none;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.3rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.4rem;
     float: none;
-    padding: 0.45rem 0.35rem;
+    padding: 0.55rem 0.45rem;
     background: var(--accent-soft);
     border: 1px dashed var(--border-strong);
     border-radius: var(--radius);
@@ -295,35 +310,115 @@ body > .section:not([id]) {
     display: flex;
 }
 
-.new-row-form .delete-button {
-    position: static;
-    transform: none;
-    margin-left: auto;
+.new-field-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.35rem;
+    width: 100%;
+    min-width: 0;
 }
 
+.new-field-label {
+    flex: 0 0 5.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+.new-field-row .info-container {
+    margin-left: 0;
+    flex-shrink: 0;
+}
+
+.new-field-input,
 .new-row-form input[type="text"],
 #new-row-2 input[type="text"],
 #new-row-3 input[type="text"] {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
     font-family: var(--font);
     font-size: 0.75rem;
     color: var(--text);
     background: var(--surface);
     border: 1px solid var(--border-strong);
     border-radius: 4px;
-    padding: 0.28rem 0.4rem;
-    min-width: 0;
+    padding: 0.3rem 0.4rem;
 }
 
-.new-name {
-    width: 18%;
+.field-clear-button {
+    flex-shrink: 0;
+    width: 1.45rem;
+    height: 1.45rem;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1;
+    cursor: pointer;
 }
 
-.new-text {
-    width: 30%;
+.field-clear-button:hover {
+    color: var(--danger);
+    border-color: var(--danger);
+    background: var(--danger-soft);
 }
 
-.new-label-input {
-    width: 30%;
+.new-row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    width: 100%;
+    margin-top: 0.15rem;
+}
+
+.new-cancel-button {
+    height: 1.75rem;
+    padding: 0 0.7rem;
+    font-family: var(--font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-cancel-button:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+    background: var(--hover-wash);
+}
+
+.new-save-button {
+    height: 1.75rem;
+    min-width: 5rem;
+    padding: 0 0.9rem;
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--surface);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-save-button:hover {
+    background: var(--accent-muted);
+    border-color: var(--accent-muted);
+}
+
+.new-save-button:active {
+    filter: brightness(0.92);
 }
 
 .new-row-form input[type="text"]:focus,
@@ -333,6 +428,9 @@ body > .section:not([id]) {
 input[type="checkbox"]:focus-visible,
 .add-button:focus-visible,
 .delete-button:focus-visible,
+.field-clear-button:focus-visible,
+.new-cancel-button:focus-visible,
+.new-save-button:focus-visible,
 a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 1px;
