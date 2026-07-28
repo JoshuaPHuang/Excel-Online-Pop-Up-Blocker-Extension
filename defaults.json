@@ -84,9 +84,9 @@
         "state": false,
         "appended": false,
         "text": "'Frozen rows/columns won't scroll'<br>'The visible area of your grid contains only frozen rows/columns, which will not scroll. To scroll, unfreeze the rows/columns, change the size of the Excel window, or zoom out.'<br>This pop-up appears when trying to scroll on a screen with no unfrozen cells visible.",
-        "label": "Check to auto-select 'OK'.",
-        "xpath": "//div[contains(text(), 'Frozen ')][contains(text(), 't scroll')]",
-        "method": ".//button[@aria-label='OK']"
+        "label": "Check to auto-select 'Cancel'.",
+        "xpath": "//h2[contains(text(), 'Frozen ')][contains(text(), 't scroll')]",
+        "method": ".//button[@aria-label='Cancel']"
     },
     "2-4": {
         "idNumStr": "2-4",
