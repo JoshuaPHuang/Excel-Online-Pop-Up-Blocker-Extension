@@ -155,6 +155,28 @@ function initXlObserver() {
                     localMem[key].state = true;
                 }
             }
+            // Fix custom rows saved with absolute //button paths (nearestXPath requires .//)
+            let methodsFixed = false;
+            for (let key in localMem) {
+                let method = localMem[key].method;
+                if (localMem[key].appended && typeof method === 'string' && method.startsWith('//') && !method.startsWith('.//')) {
+                    localMem[key].method = '.' + method;
+                    methodsFixed = true;
+                }
+            }
+            // Persist fixed method paths for custom rows so future loads are correct
+            if (methodsFixed) {
+                chrome.storage.local.get(["xlpbMem"], (result) => {
+                    let storedMem = result.xlpbMem || {};
+                    for (let key in storedMem) {
+                        let method = storedMem[key].method;
+                        if (storedMem[key].appended && typeof method === 'string' && method.startsWith('//') && !method.startsWith('.//')) {
+                            storedMem[key].method = '.' + method;
+                        }
+                    }
+                    chrome.storage.local.set({ xlpbMem: storedMem });
+                });
+            }
             // Filter out all entries which have state: false
             localMem = Object.fromEntries(Object.entries(localMem).filter(([key, value]) => value.state === true));
             // Start the actual mutation observer with the new data

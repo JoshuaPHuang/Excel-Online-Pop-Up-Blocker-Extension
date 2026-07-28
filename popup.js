@@ -232,6 +232,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 localMem[key].state = true;
             }
         }
+        // Fix custom rows saved with absolute //button paths (nearestXPath requires .//)
+        for (let key in localMem) {
+            let method = localMem[key].method;
+            if (localMem[key].appended && typeof method === 'string' && method.startsWith('//') && !method.startsWith('.//')) {
+                localMem[key].method = '.' + method;
+                localModified = true;
+            }
+        }
         // Update chrome local storage if needed
         if (localModified) {
             chrome.storage.local.set({ xlpbMem: localMem }, () => {
@@ -339,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         text: textInput_.value,
                         label: labelInput_.value,
                         xpath: `//*[contains(text(), '${textInput_.value}')]`,
-                        method: `//button[contains(@aria-label, '${labelInput_.value}')]`,
+                        method: `.//button[contains(@aria-label, '${labelInput_.value}')]`,
                     };
                     // Append the row to popup.html
                     appendRow(rowItem);
