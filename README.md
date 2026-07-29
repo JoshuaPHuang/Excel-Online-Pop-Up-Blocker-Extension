@@ -2,7 +2,7 @@
 
 ![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-MV3-blue) ![Last Commit](https://img.shields.io/github/last-commit/JoshuaPHuang/Excel-Online-Notif-Suppressor-Extension) ![Repo Size](https://img.shields.io/github/repo-size/JoshuaPHuang/Excel-Online-Notif-Suppressor-Extension) ![License](https://img.shields.io/github/license/JoshuaPHuang/Excel-Online-Notif-Suppressor-Extension)
 
-A Chrome extension that suppresses recurring Excel Online pop-ups, dialogs, and prompts that can interrupt work, steal keyboard focus, or get in the way of hotkeys and shortcuts.
+A Chromium extension that suppresses recurring Excel Online pop-ups, dialogs, and prompts that can interrupt work, steal keyboard focus, or get in the way of hotkeys and shortcuts.
 
 All suppression options are opt-in. Changes to Excel Online behavior are made only at the user's discretion. This extension is not affiliated with Microsoft.
 
@@ -40,8 +40,9 @@ Automatically select an option when a particular pop-up appears:
   - *"Frozen rows/columns won't scroll" / "The visible area of your grid contains only frozen rows/columns, which will not scroll. To scroll, unfreeze the rows/columns, change the size of the Excel window, or zoom out."* → ***Cancel***
 - **Editing Session in Progress**
   - *"Editing session in progress" / "Other people are already editing this workbook. You can join their editing session, but you will lose any changes you have made so far. Would you like to join the existing editing session anyway?"* → ***Yes***
-- **Session Expired (Sign In Again)**
-  - *"Your session has expired. Please sign in again to continue working."* → ***Sign in again***
+- **Session Expired (Sign In)**
+  - *"Your session has expired. Please sign in again to continue working."* → ***Sign in***
+  !["Your session has expired. Please sign in again to continue working."](Session_Expired_(Sign_In_Again).png)
 - **Session Expired (Refresh)**
   - *"Sorry, your session has expired. Please refresh the page to continue."* → ***Refresh***
 - **Session About to Expire**

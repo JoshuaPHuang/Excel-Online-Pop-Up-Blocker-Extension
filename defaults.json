@@ -102,13 +102,13 @@
     "2-5": {
         "idNumStr": "2-5",
         "section": "2",
-        "name": "Session Expired (Sign In Again)",
+        "name": "Session Expired (Sign In)",
         "state": false,
         "appended": false,
-        "text": "'Sorry, your session has expired. Please sign in again to continue working.'",
-        "label": "Check to auto-select 'Sign in again'.",
+        "text": "'Your session has expired. Please sign in again to continue working.'",
+        "label": "Check to auto-select 'Sign in'.",
         "xpath": "//*[contains(text(), 'Please sign in again to continue working')]",
-        "method": ".//button[@aria-label='Sign in again']"
+        "method": ".//button[@aria-label='Sign in']"
     },
     "2-6": {
         "idNumStr": "2-6",
@@ -130,7 +130,7 @@
         "text": "'Your session is about to expire'<br>'Your organization's policy enforces automatic sign out after a period of inactivity on Office 365 web applications.'<br>'Do you want to stay signed in?'",
         "label": "Check to auto-select 'Stay signed in'.",
         "xpath": "//*[contains(text(), 'Your session is about to expire')]",
-        "method": "//button[contains(@aria-label, 'signed in')]"
+        "method": ".//button[contains(@aria-label, 'signed in')]"
     },
 
     "3-1": {
