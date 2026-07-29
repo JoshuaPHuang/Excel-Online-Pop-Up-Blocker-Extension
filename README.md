@@ -17,13 +17,13 @@ Automatically close or delete the element whenever an interruptive pop-up appear
 - **Calendar Pop-Up**
   - The date picker that blocks view of everything to the right of your cell when you press `Ctrl+;`
 - **Renaming Prompt**
-  - *“We have autosaved your file. Ready to name it?”* (sometimes appears and blocks keyboard inputs after pressing `Ctrl+S`)
-  ![“We have autosaved your file. Ready to name it?”](Renaming_Prompt.png)
+  - *"We have autosaved your file. Ready to name it?"* (sometimes appears and blocks keyboard inputs after pressing `Ctrl+S`)
+  !["We have autosaved your file. Ready to name it?"](Renaming_Prompt.png)
 - **Need More Working Space?**
-  - *“Need more working space?” / “Looks like your display is not optimised.” / “Toggle FullScreen to maximise screen space.”*
+  - *"Need more working space?" / "Looks like your display is not optimised." / "Toggle FullScreen to maximise screen space."*
 - **Reserved Shortcut Pop-Up**
-  - *“Your browser reserves some shortcuts.” / “Find the list of alternatives here.”* (sometimes appears and blocks hotkey inputs <u>while using hotkeys</u>***)
-  ![“Your browser reserves some shortcuts.” / “Find the list of alternatives here.”](Reserved_Shortcut_Pop-Up.png)
+  - *"Your browser reserves some shortcuts." / "Find the list of alternatives here."* (sometimes appears and blocks hotkey inputs <u>while using hotkeys</u>)
+  !["Your browser reserves some shortcuts." / "Find the list of alternatives here."](Reserved_Shortcut_Pop-Up.png)
 - **Ctrl Paste Menu**
   - The paste options menu that pops up after you paste with `Ctrl+V`
 
@@ -32,31 +32,31 @@ Automatically close or delete the element whenever an interruptive pop-up appear
 Automatically select an option when a particular pop-up appears:
 
 - **Workbook Locked**
-  - *“Someone has this workbook locked" / "___ has locked this file for editing. This may happen if they're using a non-subscription version of Excel. Ask them to close the file or check it in.”* → ***Continue in reading view***
+  - *"Someone has this workbook locked" / "___ has locked this file for editing. This may happen if they're using a non-subscription version of Excel. Ask them to close the file or check it in."* → ***Continue in reading view***
 - **Excel Shortcuts Enabled**
-  - *“Excel shortcuts enabled" / "To make Excel's keyboard shortcuts work in Excel for the web, we had to override some browser shortcuts. To undo this, go to Help, then select Keyboard Shortcuts, and uncheck Override browser shortcuts.”* → ***Got it***
-  ![“Excel shortcuts enabled" / "To make Excel's keyboard shortcuts work in Excel for the web, we had to override some browser shortcuts. To undo this, go to Help, then select Keyboard Shortcuts, and uncheck Override browser shortcuts.”](Excel_Shortcuts_Enabled.png)
+  - *"Excel shortcuts enabled" / "To make Excel's keyboard shortcuts work in Excel for the web, we had to override some browser shortcuts. To undo this, go to Help, then select Keyboard Shortcuts, and uncheck Override browser shortcuts."* → ***Got it***
+  !["Excel shortcuts enabled" / "To make Excel's keyboard shortcuts work in Excel for the web, we had to override some browser shortcuts. To undo this, go to Help, then select Keyboard Shortcuts, and uncheck Override browser shortcuts."](Excel_Shortcuts_Enabled.png)
 - **Frozen Rows/Columns Won't Scroll**
-  - *“Frozen rows/columns won't scroll” / "The visible area of your grid contains only frozen rows/columns, which will not scroll. To scroll, unfreeze the rows/columns, change the size of the Excel window, or zoom out."* → ***Cancel***
+  - *"Frozen rows/columns won't scroll" / "The visible area of your grid contains only frozen rows/columns, which will not scroll. To scroll, unfreeze the rows/columns, change the size of the Excel window, or zoom out."* → ***Cancel***
 - **Editing Session in Progress**
-  - *“Editing session in progress” / "Other people are already editing this workbook. You can join their editing session, but you will lose any changes you have made so far. Would you like to join the existing editing session anyway?"* → ***Yes***
+  - *"Editing session in progress" / "Other people are already editing this workbook. You can join their editing session, but you will lose any changes you have made so far. Would you like to join the existing editing session anyway?"* → ***Yes***
 - **Session Expired (Sign In Again)**
-  - *“Sorry, your session has expired. Please sign in again to continue working.”* → ***Sign in again***
+  - *"Your session has expired. Please sign in again to continue working."* → ***Sign in again***
 - **Session Expired (Refresh)**
-  - *“Sorry, your session has expired. Please refresh the page to continue.”* → ***Refresh***
+  - *"Sorry, your session has expired. Please refresh the page to continue."* → ***Refresh***
 - **Session About to Expire**
-  - *“Your session is about to expire” / "Your organization's policy enforces automatic sign out after a period of inactivity on Office 365 web applications." / “Do you want to stay signed in?”* → ***Stay signed in***
+  - *"Your session is about to expire" / "Your organization's policy enforces automatic sign out after a period of inactivity on Office 365 web applications." / "Do you want to stay signed in?"* → ***Stay signed in***
 
 ## Auto-Closeable Pop-Ups <small>- Instantly dismiss repetitive banners</small>
 
 Automatically dismiss or close the following pop-ups:
 
 - **Can't Edit Workbook Dialog**
-  - *“Can't Edit Workbook” / “Someone has this workbook locked” / "We're sorry. We couldn't lock this file for editing. Would you like to try again?”*
+  - *"Can't Edit Workbook" / "Someone has this workbook locked" / "We're sorry. We couldn't lock this file for editing. Would you like to try again?"*
 - **Trust Workbook Links Banner**
-  - *“Trust workbook links? This workbook links to data in external workbooks.”*
+  - *"Trust workbook links? This workbook links to data in external workbooks."*
 - **Unable to Refresh Links Banner**
-  - *“UNABLE TO REFRESH. We couldn't get updated values from a linked workbook.”*
+  - *"UNABLE TO REFRESH. We couldn't get updated values from a linked workbook."*
 - **Microsoft 365 Access Banner**
   - *"Allow access to Microsoft 365 account" "Your browser settings are preventing an optimal experience with Microsoft 365. Allow access to improve your experience."*
   !["Allow access to Microsoft 365 account" "Your browser settings are preventing an optimal experience with Microsoft 365. Allow access to improve your experience."](Microsoft_365_Access_Banner.png)

@@ -7,7 +7,6 @@
   "author": "Joshua Huang",
   "permissions": [
     "notifications",
-    "activeTab",
     "storage",
     "webNavigation",
     "tabs"
@@ -31,7 +30,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["logs.html", "defaults.json"],
+      "resources": ["defaults.json"],
       "matches": ["https://usc-excel.officeapps.live.com/*", "https://excel.officeapps.live.com/*", "https://officeonline.sfcollab.org/*"]
     }
   ]
