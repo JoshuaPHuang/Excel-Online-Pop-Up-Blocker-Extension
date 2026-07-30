@@ -1,22 +1,3 @@
-// Debouncer function that runs the function instantly once if only called once; sets timeout to prevent duplicate calls; calls the function at the very end of the timeout and resets behavior
-function advDebounce(func, delay) {
-    let timer;
-    let isFirstCall = true; // Flag to track the first call
-    return function(...args) {
-        if (isFirstCall) {
-            func.apply(this, args); // Execute immediately on the first call
-            isFirstCall = false;
-        } else {
-            // Clear any existing timer and set a new one for subsequent calls
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                func.apply(this, args); // Execute after the delay
-                isFirstCall = true;
-            }, delay);
-        }
-    };
-}
-
 // Function to send notifications (throttled in background.js)
 function createNotif(notifTxt) {
     chrome.runtime.sendMessage( {type: 'xlpbNotif', text: notifTxt} )    
@@ -208,7 +189,6 @@ function refreshMutObserver(newMem) {
         });
         if (addedNodesFlag) {
             suppressor(newMem);
-            // debouncedSuppressor(newMem);
         }
     })
     observer.observe(document.body, {
@@ -217,7 +197,9 @@ function refreshMutObserver(newMem) {
     });
 }
 
-const debouncedSuppressor = advDebounce(function(arg) { suppressor(arg); }, 10); // 10ms
+// Track last successful suppress time per rule so disappearing dialogs are not clicked/logged repeatedly
+const recentSuppress = new Map();
+const SUPPRESS_COOLDOWN_MS = 500;
 
 function suppressor(mem) {
     let notifFlag = false;
@@ -240,6 +222,9 @@ function suppressor(mem) {
         }
         foundElem = searchXPath(document, item.xpath);
         if (!foundElem) return;
+        // Skip if this rule already suppressed something within the cooldown window
+        const lastSuppress = recentSuppress.get(item.idNumStr) || 0;
+        if (Date.now() - lastSuppress < SUPPRESS_COOLDOWN_MS) return;
         console.log(`Found element with xpath ${item.xpath}, suppressing...`)
         let suppressedFlag = false;
         if (item.method == "REMOVE") { // Remove the element entirely if remove is selected
@@ -255,6 +240,9 @@ function suppressor(mem) {
                 console.log(`Error trying to click ${item.method}: ${error}`);
                 createLog(item.name, `Error trying to click ${item.method}: ${error}`);
             }
+        }
+        if (suppressedFlag) {
+            recentSuppress.set(item.idNumStr, Date.now());
         }
         if (notifFlag && suppressedFlag) {
             createNotif(`Suppressed: ${item.name}`);
