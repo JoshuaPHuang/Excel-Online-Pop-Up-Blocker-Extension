@@ -20,6 +20,22 @@ function timestamp() {
     return `[${month}/${day}/${year} ${hours}:${minutes}:${seconds}]`;
 }
 
+// Function to turn a string into a safe XPath string literal (handles ' and " via concat when needed)
+function escapeXPathString(value) {
+    const str = String(value);
+    if (!str.includes("'")) return `'${str}'`;
+    if (!str.includes('"')) return `"${str}"`;
+    // Both quote types present: split on ' and splice in "'" pieces inside concat(...)
+    const parts = [];
+    str.split("'").forEach((part, i, arr) => {
+        if (part !== '') parts.push(`'${part}'`);
+        if (i < arr.length - 1) parts.push(`"'"`); // one apostrophe as an XPath literal
+    });
+    if (parts.length === 0) return "''";
+    if (parts.length === 1) return parts[0];
+    return `concat(${parts.join(', ')})`;
+}
+
 // Create a queue class that you can queue.add(() => {...resolve();}) so that each task is resolved before starting the next in queue 
 class PromiseQueue {
     constructor() {
@@ -346,8 +362,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         appended: true,
                         text: textInput_.value,
                         label: labelInput_.value,
-                        xpath: `//*[contains(text(), '${textInput_.value}')]`,
-                        method: `.//button[contains(@aria-label, '${labelInput_.value}')]`,
+                        xpath: `//*[contains(text(), ${escapeXPathString(textInput_.value)})]`,
+                        method: `.//button[contains(@aria-label, ${escapeXPathString(labelInput_.value)})]`,
                     };
                     // Append the row to popup.html
                     appendRow(rowItem);
