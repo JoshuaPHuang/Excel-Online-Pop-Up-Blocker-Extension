@@ -1,5 +1,20 @@
-chrome.storage.local.get(["xlpbLogs"], function(result) {
+function renderLogs(logs) {
     const logOutput = document.getElementById('log-output');
-    const logs = result.xlpbLogs || [];
-    logOutput.textContent = logs.length ? logs.join("\n") : 'No logs available.';
+    const logsArr = logs || [];
+    // Newest first (storage keeps oldest→newest)
+    logOutput.textContent = logsArr.length ? logsArr.slice().reverse().join("\n") : 'No logs available.';
+}
+
+function loadLogs() {
+    chrome.storage.local.get(["xlpbLogs"], function(result) {
+        renderLogs(result.xlpbLogs);
+    });
+}
+
+document.getElementById('clear-logs-button').addEventListener('click', function() {
+    chrome.storage.local.set({ xlpbLogs: [] }, function() {
+        renderLogs([]);
+    });
 });
+
+loadLogs();
