@@ -2,7 +2,7 @@ function renderLogs(logs) {
     const logOutput = document.getElementById('log-output');
     const logsArr = logs || [];
     // Newest first (storage keeps oldest→newest)
-    logOutput.textContent = logsArr.length ? logsArr.slice().reverse().join("\n") : 'No logs available.';
+    logOutput.textContent = logsArr.length ? logsArr.slice().reverse().join("\n") : 'No logs currently in local storage.';
 }
 
 function loadLogs() {
